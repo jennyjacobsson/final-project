@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { InfoCard } from 'components/InfoCard'
 import { StartPage } from 'components/StartPage'
+import { SalesForm } from 'components/SalesForm'
 
 export const App = () => {
   return (
@@ -10,6 +11,9 @@ export const App = () => {
         <Switch>
           <Route path="/" exact>
             <StartPage />
+          </Route>
+          <Route path="/newad">
+            <SalesForm />
           </Route>
 
           <Route path="/plants">

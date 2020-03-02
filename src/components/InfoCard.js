@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { PlantImg } from './PlantImg'
-import { ResponsButton } from './ResponsButton'
+import Button from './Button'
 
 const Header = styled.div`
 padding: 20px 0;
@@ -56,8 +56,10 @@ export const InfoCard = () => {
           <Emoji src="https://cdn.pixabay.com/photo/2013/07/12/17/20/four-leaf-clover-152047_960_720.png" />Located in: Nyköping
         </Wrap>
         <Wrap><Emoji src="https://cdn.pixabay.com/photo/2013/07/12/17/20/four-leaf-clover-152047_960_720.png" /> Has screamed for 15 days.</Wrap>
-        <ResponsButton />
+        <Button label="I'LL SAVE YOU!" />
       </Container>
     </>
   )
 }
+
+// TODO: Write onlclick function, sen in as props in btn

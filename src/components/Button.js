@@ -6,7 +6,7 @@ const Container = styled.div`
 margin:40px 0;
 text-align:center;`
 
-const Button = styled.button`
+const Btn = styled.button`
 height:40px;
 width:140px;
 border: 1px solid lightgray;
@@ -15,10 +15,12 @@ font-size:16px;
 color:gray;
 `
 
-export const ResponsButton = () => {
+const Button = ({ label, onClick }) => {
   return (
     <Container>
-      <Button>I'LL SAVE YOU!</Button>
+      <Btn type="submit" onClick={onClick}>{label}</Btn>
     </Container>
   )
 }
+
+export default Button
