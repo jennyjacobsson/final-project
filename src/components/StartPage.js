@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
+import { useDebounce } from 'use-debounce'
+import { Link } from 'react-router-dom';
 import { LinkAd } from './LinkAd'
 
 const Header = styled.div` 
@@ -15,6 +17,12 @@ const Header = styled.div`
 const HeaderText = styled.div`
   display:block;
   color:white;
+
+ a {
+  color:white;
+  /* text-decoration:none; */
+  cursor:pointer;
+ }
 `
 
 const Container = styled.div`
@@ -41,21 +49,43 @@ const SearchField = styled.input`
 `
 
 export const StartPage = () => {
+  const [search, setSearch] = useState('')
+  const [ads, setAds] = useState([])
+
+  const [searchQuery] = useDebounce(search, 500)
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/ads?search=${searchQuery}`)
+      .then((res) => res.json())
+      .then((json) => setAds(json))
+  }, [searchQuery])
+
   return (
     <>
       <Header>
         <HeaderText>
           <h1>SAVE A PLANT</h1>
           <h2>Adopt plants in need of saving!</h2>
-          <p>Give your plants a new change</p>
+          <Link to="/newad">
+            <p>Give your plants a new change</p>
+          </Link>
         </HeaderText>
       </Header>
       <Container>
         <Form>
-          <SearchField type="search" placeholder="Search for specific plants" />
+          <SearchField type="search" onChange={(event) => setSearch(event.target.value)} value={search} placeholder="Search for specific plants" />
         </Form>
         <h3>PLANTS READY FOR ADOPTION</h3>
-        <LinkAd />
+        {ads.map((ad) => {
+          return (
+            <LinkAd
+              key={ad._id}
+              type={ad.type}
+              location={ad.location}
+              description={ad.description}
+              price={ad.price} />
+          );
+        })}
       </Container>
     </>
   )
