@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { InfoCard } from 'components/InfoCard'
 import { StartPage } from 'components/StartPage'
 import { SalesForm } from 'components/SalesForm'
+import { ResponseForm } from 'components/ResponsForm'
 
 export const App = () => {
   return (
@@ -15,10 +16,10 @@ export const App = () => {
           <Route path="/newad">
             <SalesForm />
           </Route>
-
-          <Route path="/plants">
-            <InfoCard />
+          <Route path="/respons">
+            <ResponseForm />
           </Route>
+          <Route path="/plants/:id" component={InfoCard} />
 
         </Switch>
       </main>

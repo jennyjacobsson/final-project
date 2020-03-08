@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useDebounce } from 'use-debounce'
 import { Link } from 'react-router-dom';
+import { Loading } from 'components/Loader'
 import { LinkAd } from './LinkAd'
 
 const Header = styled.div` 
   display:flex;
   height:300px;
   width:auto;
-  background-image: url('https://images.pexels.com/photos/2495651/pexels-photo-2495651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=300');
+  background-color:darkgrey;
+  /* background-image: url('https://images.pexels.com/photos/2495651/pexels-photo-2495651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=300'); */
   text-align:center;
   align-items:center;
   justify-content:center;
@@ -51,6 +53,7 @@ const SearchField = styled.input`
 export const StartPage = () => {
   const [search, setSearch] = useState('')
   const [ads, setAds] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const [searchQuery] = useDebounce(search, 500)
 
@@ -58,6 +61,7 @@ export const StartPage = () => {
     fetch(`http://localhost:8080/ads?search=${searchQuery}`)
       .then((res) => res.json())
       .then((json) => setAds(json))
+    setLoading(false)
   }, [searchQuery])
 
   return (
@@ -72,20 +76,29 @@ export const StartPage = () => {
         </HeaderText>
       </Header>
       <Container>
+        {loading
+          && <Loading />}
         <Form>
           <SearchField type="search" onChange={(event) => setSearch(event.target.value)} value={search} placeholder="Search for specific plants" />
         </Form>
-        <h3>PLANTS READY FOR ADOPTION</h3>
-        {ads.map((ad) => {
-          return (
-            <LinkAd
-              key={ad._id}
-              type={ad.type}
-              location={ad.location}
-              description={ad.description}
-              price={ad.price} />
-          );
-        })}
+
+        {!loading && (
+          <>
+            <h3>PLANTS READY FOR ADOPTION</h3>
+            {ads.map((ad) => {
+              return (
+                <LinkAd
+                  key={ad._id}
+                  id={ad._id}
+                  title={ad.title}
+                  type={ad.type}
+                  location={ad.location}
+                  price={ad.price}
+                  imageUrl={ad.imageUrl} />
+              );
+            })}
+          </>
+        )}
       </Container>
     </>
   )

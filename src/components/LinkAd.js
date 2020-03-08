@@ -20,21 +20,15 @@ display:flex;
 justify-content:space-between;
 `
 
-const Emoji = styled.img`
-width:auto;
-height:20px;
-`
-
-export const LinkAd = ({ title, type, location, description, price }) => {
+export const LinkAd = ({ id, title, location, price, imageUrl }) => {
   return (
-    <Link to="/plants">
+    <Link to={`/plants/${id}`}>
       <Container>
-        <PlantImg />
+        <PlantImg imageUrl={imageUrl} />
         <Wrap>
           <Location>- {location}</Location>
-          <Emoji src="https://cdn.pixabay.com/photo/2013/07/12/17/20/four-leaf-clover-152047_960_720.png" />
         </Wrap>
-        <Title>Svärmorstunga i behov av nytt hem med mycket kärlek</Title>
+        <Title>{title}</Title>
       </Container>
     </Link>
   )

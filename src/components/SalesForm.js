@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components/macro'
+import { Link } from 'react-router-dom'
 import Button from './Button'
 
 const Container = styled.div`
@@ -30,6 +31,15 @@ width:50%;
 font-size:16px;
 `
 
+const EmailInput = styled(Input)`
+`
+
+const TextArea = styled(Input).attrs({
+  as: 'textarea'
+})`
+  resize:vertical;
+`
+
 const Image = styled.img`
 height:200px;
 flex-shrink:0;
@@ -41,6 +51,8 @@ object-position:right;
 
 export const SalesForm = () => {
   const fileInput = useRef()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const [title, setTitle] = useState('')
   const [type, setType] = useState('')
   const [location, setLocation] = useState('')
@@ -52,6 +64,8 @@ export const SalesForm = () => {
     event.preventDefault()
     const formData = new FormData()
     formData.append('image', fileInput.current.files[0])
+    formData.append('name', name)
+    formData.append('email', email)
     formData.append('title', title)
     formData.append('type', type)
     formData.append('location', location)
@@ -65,6 +79,8 @@ export const SalesForm = () => {
       .then((res) => {
         res.json()
           .then((json) => setMessage(json.message))
+        setName('')
+        setEmail('')
         setTitle('')
         setType('')
         setLocation('')
@@ -72,22 +88,24 @@ export const SalesForm = () => {
         setPrice('')
       })
       .catch((err) => console.log('error', err))
-
-    // fetch('http://localhost:8080/ad', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ title, type, location, description, price }),
-    //   headers: { 'Content-Type': 'application/json ' }
-    // })
-    //   .then((res) => {
-    //     res.json().then((json) => setMessage(json.message))
-    //   })
-    //   .catch((err) => console.log('error:', err))
   }
 
   return (
     <Container>
       <Form onSubmit={handleSubmitAd}>
         <Title>Send out an SOS!</Title>
+        <Input
+          type="name"
+          required
+          placeholder="Name"
+          onChange={(event) => setName(event.target.value)}
+          value={name} />
+        <EmailInput
+          type="email"
+          required
+          placeholder="E-mail"
+          onChange={(event) => setEmail(event.target.value)}
+          value={email} />
         <Input
           type="text"
           required
@@ -109,22 +127,26 @@ export const SalesForm = () => {
         <Input
           type="text"
           required
-          placeholder="Description"
-          onChange={(event) => setDescription(event.target.value)}
-          value={description} />
-        <Input
-          type="text"
-          required
           placeholder="Price"
           onChange={(event) => setPrice(event.target.value)}
           value={price} />
         <FileInput
           type="file"
           ref={fileInput} />
+        <TextArea
+          type="text-area"
+          rows="4"
+          required
+          placeholder="Description"
+          onChange={(event) => setDescription(event.target.value)}
+          value={description} />
         <Button label="Submit!" />
       </Form>
       <Image src="/assets/plant.jpg" />
       {message}
+      <Link to="/">
+        <p>Back to the plants</p>
+      </Link>
     </Container>
 
   )

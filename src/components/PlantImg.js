@@ -7,8 +7,8 @@ width:100%;
 display:block;
 `
 
-export const PlantImg = () => {
+export const PlantImg = (props) => {
   return (
-    <Image src="https://images.pexels.com/photos/1005058/pexels-photo-1005058.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=300" />
+    <Image src={props.imageUrl} />
   )
 }
