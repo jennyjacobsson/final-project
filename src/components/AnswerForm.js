@@ -32,16 +32,16 @@ const MessageInput = styled(Input).attrs({
   resize:vertical;
 `
 
-export const ResponseForm = () => {
+export const AnswerForm = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [handleMessage, setHandleMessage] = useState('')
 
-  const handleResponseAd = (event) => {
+  const handleAnswerForm = (event) => {
     event.preventDefault()
-    fetch('http://localhost:8080/response', {
+    fetch('http://localhost:8080/answer', {
       method: 'POST',
       body: JSON.stringify({ name, email, subject, message }),
       headers: { 'Content-Type': 'application/json ' }
@@ -53,7 +53,7 @@ export const ResponseForm = () => {
   }
   return (
     <Container>
-      <Form onSubmit={handleResponseAd}>
+      <Form onSubmit={handleAnswerForm}>
         <Title> I'll save this one!</Title>
         <Input
           type="text"

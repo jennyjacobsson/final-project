@@ -74,7 +74,10 @@ export const SalesForm = () => {
 
     fetch('http://localhost:8080/ad', {
       method: 'POST',
-      body: formData
+      body: formData,
+      headers: {
+        Authorization: window.localStorage.getItem('accessToken')
+      }
     })
       .then((res) => {
         res.json()

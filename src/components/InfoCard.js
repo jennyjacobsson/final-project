@@ -74,7 +74,7 @@ export const InfoCard = ({ match: { params: { id } } }) => {
               <Emoji src="https://cdn.pixabay.com/photo/2013/07/12/17/20/four-leaf-clover-152047_960_720.png" />Located in: {ad.location}
             </Wrap>
             <Wrap><Emoji src="https://cdn.pixabay.com/photo/2013/07/12/17/20/four-leaf-clover-152047_960_720.png" /> Has screamed for 15 days.</Wrap>
-            <Link to="/response">
+            <Link to="/answer">
               <Button label="I'LL SAVE YOU!" />
             </Link>
             <Link to="/">
