@@ -2,34 +2,78 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 import { PlantImg } from './PlantImg'
+import { LocationSvg } from './icons/LocationSvg'
+import { PriceSvg } from './icons/PriceSvg'
+import { HeartSvg } from './icons/HeartSvg'
+
+const NewLink = styled(Link)`
+  text-decoration: none;
+`
 
 const Container = styled.div`
-  border: 1px solid lightgrey;
+  margin-bottom:16px;
+  padding:10px;
+  /* border: 1px solid lightgrey; */
   color:gray;
+  background-color:#fff;
+  border-radius:6px;
+  overflow:hidden;
 `
 
-const Title = styled.h4`
+const Title = styled.h3`
 text-align:left;
 `
-const Location = styled.p`
+
+const Text = styled.p`
+display: flex;
+align-items: center;
 margin:0;
+padding: 10px 16px;
 font-size:14px;
 `
+
+const TextBlue = styled(Text)`
+background: blue;
+color: white;
+font-weight:bold;
+`
+
 const Wrap = styled.div`
 display:flex;
 justify-content:space-between;
+width:auto;
+background-color:#F3F3F3;
+align-items:stretch;
+
+svg {
+  margin-right:8px;
+}
+`
+
+const Location = styled(LocationSvg)`
+  margin-right: 5px;
+`
+
+const Price = styled(PriceSvg)`
+  margin-right: 5px;
+`
+
+const Heart = styled(HeartSvg)`
+  margin-right: 5px;
 `
 
 export const LinkAd = ({ id, title, location, price, imageUrl }) => {
   return (
-    <Link to={`/plants/${id}`}>
+    <NewLink to={`/plants/${id}`}>
       <Container>
         <PlantImg imageUrl={imageUrl} />
-        <Wrap>
-          <Location>- {location}</Location>
-        </Wrap>
         <Title>{title}</Title>
+        <Wrap>
+          <Text><Location /> {location}</Text>
+          <Text><Price /> {price}</Text>
+          <TextBlue><Heart fill="white" /> Pick me!</TextBlue>
+        </Wrap>
       </Container>
-    </Link>
+    </NewLink>
   )
 }

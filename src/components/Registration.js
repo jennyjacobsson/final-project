@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import Button from 'components/Button'
+import { Container } from 'components/StyledCollection'
 
 const Title = styled.h1`
 font-size:24px;
 
 `
 const Form = styled.form`
-border: 1px solid lightgray;
+
 `
 
 const Input = styled.input`
@@ -43,7 +44,7 @@ export const Registration = () => {
   }
 
   return (
-    <>
+    <Container>
       <Form>
         <Title>Register</Title>
         <Input
@@ -70,7 +71,7 @@ export const Registration = () => {
 
       </Form>
       {message}
-    </>
+    </Container>
 
   )
 }

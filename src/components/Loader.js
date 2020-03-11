@@ -22,7 +22,7 @@ export const Loading = () => {
   return (
     <Loader>
         Plants coming up!
-      <span role="img" aria-label="heart">
+      <span role="img" aria-label="leaf">
         🌱
       </span>
     </Loader>

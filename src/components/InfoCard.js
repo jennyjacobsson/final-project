@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { Loading } from 'components/Loader'
+import { LocationSvg } from './icons/LocationSvg'
+import { PriceSvg } from './icons/PriceSvg'
 import { PlantImg } from './PlantImg'
 import Button from './Button'
 
 const Header = styled.div`
 padding: 20px 0;
-background-color:lightblue;
 text-align:center;
 align-items:center;
 justify-content:center;
@@ -21,8 +22,10 @@ font-size:25px;
 `
 
 const Container = styled.div`
-margin:20px;
+padding:15px;
 color:gray;
+background-color:white;
+border-radius:6px;
 `
 const Title = styled.h1`
 `
@@ -31,14 +34,13 @@ const Text = styled.p`
 margin-bottom:20px;
 `
 
-const Emoji = styled.img`
-width:auto;
-height:20px;
-`
-
 const Wrap = styled.div`
 margin:15px 0;
 font-size:14px;
+
+svg {
+  margin-right:8px;
+}
 `
 
 export const InfoCard = ({ match: { params: { id } } }) => {
@@ -71,9 +73,9 @@ export const InfoCard = ({ match: { params: { id } } }) => {
             <Text>{ad.description}
             </Text>
             <Wrap>
-              <Emoji src="https://cdn.pixabay.com/photo/2013/07/12/17/20/four-leaf-clover-152047_960_720.png" />Located in: {ad.location}
+              <LocationSvg /> {ad.location}
             </Wrap>
-            <Wrap><Emoji src="https://cdn.pixabay.com/photo/2013/07/12/17/20/four-leaf-clover-152047_960_720.png" /> Has screamed for 15 days.</Wrap>
+            <Wrap><PriceSvg /> {ad.price} kr</Wrap>
             <Link to="/answer">
               <Button label="I'LL SAVE YOU!" />
             </Link>

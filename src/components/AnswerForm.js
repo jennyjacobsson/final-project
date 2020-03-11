@@ -1,21 +1,24 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
+import { Container } from 'components/StyledCollection'
 import Button from './Button'
 
-const Container = styled.div`
-min-height:100vh;
-display:flex;
-flex-direction:column;
-text-align:center;
-justify-content: space-between;
-`
+// const FormContainer = styled(Container)`
+// /* min-height:100vh;
+// display:flex;
+// flex-direction:column;
+// text-align:center;
+// justify-content: space-between; */
+// `
+
 const Title = styled.h1`
 font-size:24px;
 
 `
 const Form = styled.form`
-border: 1px solid lightgray;
+text-align:center;
+
 `
 
 const Input = styled.input`
@@ -30,6 +33,22 @@ const MessageInput = styled(Input).attrs({
   as: 'textarea'
 })`
   resize:vertical;
+`
+
+const Image = styled.img`
+/* position:absolute;
+bottom:20px;
+right:10px; */
+height:150px;
+flex-shrink:0;
+flex-grow:0;
+width:auto;
+object-fit:contain;
+object-position:center;
+`
+const ImageWrap = styled.div`
+display:flex;
+flex-direction:column;
 `
 
 export const AnswerForm = () => {
@@ -82,6 +101,9 @@ export const AnswerForm = () => {
           value={message} />
         <Button label="Send!" />
       </Form>
+      <ImageWrap>
+        <Image src="assets/ShinePlant.png" />
+      </ImageWrap>
       <Link to="/">
         <p>Back to the plants</p>
       </Link>

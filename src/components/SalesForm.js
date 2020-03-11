@@ -15,7 +15,7 @@ font-size:24px;
 
 `
 const Form = styled.form`
-border: 1px solid lightgray;
+/* border: 1px solid lightgray; */
 `
 
 const Input = styled.input`
@@ -27,8 +27,9 @@ const Input = styled.input`
 `
 
 const FileInput = styled(Input)`
-width:50%;
+width:55%;
 font-size:16px;
+background-color:white;
 `
 
 const EmailInput = styled(Input)`
@@ -40,14 +41,14 @@ const TextArea = styled(Input).attrs({
   resize:vertical;
 `
 
-const Image = styled.img`
-height:200px;
-flex-shrink:0;
-flex-grow:0;
-width:auto;
-object-fit:contain;
-object-position:right;
-`
+// const Image = styled.img`
+// height:200px;
+// flex-shrink:0;
+// flex-grow:0;
+// width:auto;
+// object-fit:contain;
+// object-position:right;
+// `
 
 export const SalesForm = () => {
   const fileInput = useRef()
@@ -145,7 +146,7 @@ export const SalesForm = () => {
           value={description} />
         <Button label="Submit!" />
       </Form>
-      <Image src="/assets/plant.jpg" />
+      {/* <Image src="/assets/plant.jpg" /> */}
       {message}
       <Link to="/">
         <p>Back to the plants</p>

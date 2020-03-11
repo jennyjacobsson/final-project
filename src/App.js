@@ -7,11 +7,13 @@ import { AnswerForm } from 'components/AnswerForm'
 import { Login } from 'components/Login'
 import { Registration } from 'components/Registration'
 import { MyPage } from 'components/MyPage'
+import { Navbar } from 'components/Navbar'
 
 export const App = () => {
   return (
     <BrowserRouter>
       <main>
+        <Navbar />
         <Switch>
           <Route path="/" exact component={StartPage} />
           <Route path="/newad" component={SalesForm} />

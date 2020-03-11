@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import Button from 'components/Button'
+import { Container } from 'components/StyledCollection'
 
 const Title = styled.h1`
 font-size:24px;
+margin:20px;
 
 `
 const Form = styled.form`
-border: 1px solid lightgray;
+margin-bottom:150px;
+
 `
 
 const Input = styled.input`
@@ -19,6 +22,17 @@ const Input = styled.input`
   border-radius: 3px;
 `
 
+const Image = styled.img`
+height:150px;
+flex-shrink:0;
+flex-grow:0;
+width:auto;
+object-fit:contain;
+`
+const ImageWrap = styled.div`
+display:flex;
+flex-direction:column;
+`
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -50,25 +64,30 @@ export const Login = () => {
   }
 
   return (
-    <Form>
-      <Title>Log in</Title>
-      <Input
-        type="text"
-        onChange={(event) => setEmail(event.target.value)}
-        value={email}
-        placeholder="Email" />
+    <Container>
+      <Form>
+        <Title>Log in</Title>
+        <Input
+          type="text"
+          onChange={(event) => setEmail(event.target.value)}
+          value={email}
+          placeholder="Email" />
 
-      <Input
-        type="password"
-        onChange={(event) => setPassword(event.target.value)}
-        value={password}
-        placeholder=" Password" />
+        <Input
+          type="password"
+          onChange={(event) => setPassword(event.target.value)}
+          value={password}
+          placeholder=" Password" />
 
-      <Button
-        label="Log in"
-        type="submit"
-        onClick={handleLogin} />
-      {errorMessage}
-    </Form>
+        <Button
+          label="Log in"
+          type="submit"
+          onClick={handleLogin} />
+        {errorMessage}
+      </Form>
+      <ImageWrap>
+        <Image src="assets/SmilePlant.png" />
+      </ImageWrap>
+    </Container>
   )
 }

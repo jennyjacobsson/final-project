@@ -3,15 +3,17 @@ import { useHistory } from 'react-router-dom'
 import Button from 'components/Button'
 import styled from 'styled-components/macro'
 import { LinkAd } from 'components/LinkAd'
+import { Container } from 'components/StyledCollection'
 
 const Title = styled.h1`
 font-size:24px;
+margin:20px;
 `
 
 export const MyPage = () => {
   const history = useHistory()
   const [errorMessage, setErrorMessage] = useState('')
-  const [secret, setSecret] = useState('')
+  const [secret, setSecret] = useState(true)
   const [userAds, setUserAds] = useState([])
 
   const accessToken = window.localStorage.getItem('accessToken')
@@ -28,7 +30,7 @@ export const MyPage = () => {
           throw new Error('Access denied')
         } return res.json()
       })
-      .then((json) => setSecret(json))
+      .then((json) => setSecret(json.secret))
       .catch((err) => {
         setErrorMessage(err.message)
       })
@@ -51,20 +53,19 @@ export const MyPage = () => {
   }
 
   return (
-    <>
+    <Container>
       {secret && (
         <>
           <Title>Hello Stranger</Title>
+          <Button label="Log Out" onClick={handleSignOut} />
           {userAds.map((userAd) => {
             return (
-              <>
-                <LinkAd imageUrl={userAd.imageUrl} title={userAd.title} />
-                <Button label="Log Out" onClick={handleSignOut} />
-              </>)
+              <LinkAd id={userAd._id} imageUrl={userAd.imageUrl} title={userAd.title} location={userAd.location} />
+            )
           })}
         </>
       )}
       {errorMessage}
-    </>
+    </Container>
   )
 }
