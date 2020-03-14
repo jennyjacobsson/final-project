@@ -1,38 +1,33 @@
 import React, { useState, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'components/Redirect'
+import { Container, Form, Input, Title } from 'components/StyledCollection'
 import Button from './Button'
+import { getAuth } from '../App'
 
-const Container = styled.div`
-min-height:100vh;
-display:flex;
-flex-direction:column;
-text-align:center;
-justify-content: space-between;
-`
-const Title = styled.h1`
-font-size:24px;
+const File = styled.label`
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+padding: 10px 25px;
+font-size: 16px;
+background-color: white;
+overflow: hidden;
+border-radius: 6px;
 
-`
-const Form = styled.form`
-/* border: 1px solid lightgray; */
-`
-
-const Input = styled.input`
-  font-size: 18px;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
+input {
+  position: absolute;
+  left: -10000em;
+}
 `
 
-const FileInput = styled(Input)`
-width:55%;
-font-size:16px;
-background-color:white;
-`
-
-const EmailInput = styled(Input)`
+const FileImage = styled.img`
+flex-shrink: 0;
+width: 50px;
+height: auto;
+margin-right: 1em;
 `
 
 const TextArea = styled(Input).attrs({
@@ -41,34 +36,30 @@ const TextArea = styled(Input).attrs({
   resize:vertical;
 `
 
-// const Image = styled.img`
-// height:200px;
-// flex-shrink:0;
-// flex-grow:0;
-// width:auto;
-// object-fit:contain;
-// object-position:right;
-// `
-
 export const SalesForm = () => {
+  const history = useHistory()
   const fileInput = useRef()
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
   const [title, setTitle] = useState('')
   const [type, setType] = useState('')
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
-  const [message, setMessage] = useState('')
+  const [filename, setFilename] = useState('')
+
+  const { accessToken } = getAuth()
+
+  const handleFileChange = () => {
+    const [currentFile] = fileInput.current.files
+    const { name } = currentFile
+    setFilename(name || '')
+  }
 
   const handleSubmitAd = (event) => {
     event.preventDefault()
     const formData = new FormData()
     formData.append('image', fileInput.current.files[0])
-    formData.append('name', name)
-    formData.append('email', email)
-    formData.append('title', title)
     formData.append('type', type)
+    formData.append('title', title)
     formData.append('location', location)
     formData.append('description', description)
     formData.append('price', price)
@@ -77,39 +68,36 @@ export const SalesForm = () => {
       method: 'POST',
       body: formData,
       headers: {
-        Authorization: window.localStorage.getItem('accessToken')
+        Authorization: accessToken
       }
     })
       .then((res) => {
-        res.json()
-          .then((json) => setMessage(json.message))
-        setName('')
-        setEmail('')
-        setTitle('')
-        setType('')
-        setLocation('')
-        setDescription('')
-        setPrice('')
+        if (!res.ok) {
+          alert('umm.. nope')
+        }
+        history.push('/mypage')
       })
       .catch((err) => console.log('error', err))
+  }
+
+  if (!accessToken) {
+    return (
+      <Redirect />
+    )
   }
 
   return (
     <Container>
       <Form onSubmit={handleSubmitAd}>
         <Title>Send out an SOS!</Title>
-        <Input
-          type="name"
-          required
-          placeholder="Name"
-          onChange={(event) => setName(event.target.value)}
-          value={name} />
-        <EmailInput
-          type="email"
-          required
-          placeholder="E-mail"
-          onChange={(event) => setEmail(event.target.value)}
-          value={email} />
+        <File>
+          <input
+            type="file"
+            ref={fileInput}
+            onChange={handleFileChange} />
+          <FileImage src={`/assets/${filename ? 'Shine' : 'Sales'}Plant.png`} loading="lazy" />
+          {filename || 'Select an image'}
+        </File>
         <Input
           type="text"
           required
@@ -134,9 +122,6 @@ export const SalesForm = () => {
           placeholder="Price"
           onChange={(event) => setPrice(event.target.value)}
           value={price} />
-        <FileInput
-          type="file"
-          ref={fileInput} />
         <TextArea
           type="text-area"
           rows="4"
@@ -146,12 +131,6 @@ export const SalesForm = () => {
           value={description} />
         <Button label="Submit!" />
       </Form>
-      {/* <Image src="/assets/plant.jpg" /> */}
-      {message}
-      <Link to="/">
-        <p>Back to the plants</p>
-      </Link>
     </Container>
-
   )
 }

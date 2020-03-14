@@ -9,6 +9,14 @@ import { Registration } from 'components/Registration'
 import { MyPage } from 'components/MyPage'
 import { Navbar } from 'components/Navbar'
 
+export const getAuth = () => {
+  return {
+    userId: window.localStorage.getItem('userId'),
+    userName: window.localStorage.getItem('userName'),
+    accessToken: window.localStorage.getItem('accessToken')
+  }
+}
+
 export const App = () => {
   return (
     <BrowserRouter>

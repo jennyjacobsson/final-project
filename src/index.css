@@ -3,8 +3,6 @@ body {
   background-color:#9FF5FF;
   /* background-color:rgb(203, 250, 255); */
   min-height: 100vh;
-  padding:8px;
-  
 }
 
 body {
@@ -14,6 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #222;
 }
 
 code {

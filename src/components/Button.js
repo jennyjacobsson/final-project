@@ -7,18 +7,19 @@ margin:40px 0;
 text-align:center;`
 
 const Btn = styled.button`
-height:40px;
-width:140px;
-border: 1px solid lightgray;
-border-radius:2px;
-font-size:16px;
-color:gray;
+border-radius: 6px;
+font-size: 20px;
+border: 0;
+font-weight: 600;
+padding: 12px 26px;
+color: ${({ color }) => color || '#fff'};
+background-color: ${({ bg }) => bg || '#35749f'};
 `
 
-const Button = ({ label, onClick }) => {
+const Button = ({ label, onClick, bg }) => {
   return (
     <Container>
-      <Btn type="submit" onClick={onClick}>{label}</Btn>
+      <Btn type="submit" onClick={onClick} bg={bg}>{label}</Btn>
     </Container>
   )
 }

@@ -3,18 +3,15 @@ import styled from 'styled-components/macro'
 import { useDebounce } from 'use-debounce'
 import { Link } from 'react-router-dom';
 import { Loading } from 'components/Loader'
-import { Navbar } from 'components/Navbar'
 import { LinkAd } from 'components/LinkAd'
 import { GlassSvg } from './icons/GlassSvg'
+import { Container } from './StyledCollection'
 
 const Header = styled.div` 
   display:flex;
   height:400px;
   width:auto;
-  /* background-color:darkgrey; */
-  /* background-image: url('https://images.pexels.com/photos/2495651/pexels-photo-2495651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=300'); */
   text-align:center;
-  /* align-items:center; */
   justify-content:center;`
 
 const LogoImage = styled.img`
@@ -29,30 +26,35 @@ const HeaderText = styled.div`
 
   h1 {
     font-family: 'Knewave', cursive;
+    font-weight: normal;
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 18px;
+    margin: 0;
   }
 
  a {
   color:white;
-  /* text-decoration:none; */
   cursor:pointer;
  }
 `
 
-const Container = styled.div`
-  color:gray;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-
+const Outer = styled(Container)`
   h2 {
-    margin:40px 0;
-    font-size: 20px;
+    margin: 40px 0 20px;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 18px;
   }
   `
 
 const Form = styled.form` 
   text-align: center;
   position:relative;
+  margin-bottom: 20px;
 
   svg {
     position:absolute;
@@ -71,9 +73,11 @@ const SearchField = styled.input`
   font-size:18px;
 `
 
-const Text = styled.p`
-
+const CreateLink = styled(Link)`
+color: #35749f;
+font-size: 18px;
 `
+
 export const StartPage = () => {
   const [search, setSearch] = useState('')
   const [ads, setAds] = useState([])
@@ -90,9 +94,7 @@ export const StartPage = () => {
 
   return (
     <>
-      <Navbar />
       <Header>
-
         <HeaderText>
           <LogoImage src="/assets/logo.png" />
           <h1>Plants Ahoy!</h1>
@@ -104,20 +106,19 @@ export const StartPage = () => {
           </Link> */}
         </HeaderText>
       </Header>
-      <Container>
+      <Outer>
         {loading
           && <Loading />}
         <Form>
           <GlassSvg />
           <SearchField type="search" onChange={(event) => setSearch(event.target.value)} value={search} placeholder="Search for type or location" />
-        </Form> <Link to="/newad">
-          <Text>Or log in and create an ad</Text>
-        </Link>
+        </Form>
+
+        <CreateLink to="/newad">Create ad</CreateLink>
 
         {!loading && (
           <>
             <h2>Plants looking for a new home</h2>
-            {/* <h2>PLANTS READY FOR ADOPTION</h2> */}
             {ads.map((ad) => {
               return (
                 <LinkAd
@@ -132,7 +133,7 @@ export const StartPage = () => {
             })}
           </>
         )}
-      </Container>
+      </Outer>
     </>
   )
 }

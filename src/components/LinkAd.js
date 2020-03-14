@@ -12,8 +12,6 @@ const NewLink = styled(Link)`
 
 const Container = styled.div`
   margin-bottom:16px;
-  padding:10px;
-  /* border: 1px solid lightgrey; */
   color:gray;
   background-color:#fff;
   border-radius:6px;
@@ -22,6 +20,7 @@ const Container = styled.div`
 
 const Title = styled.h3`
 text-align:left;
+padding: 0 10px;
 `
 
 const Text = styled.p`
@@ -33,7 +32,7 @@ font-size:14px;
 `
 
 const TextBlue = styled(Text)`
-background: blue;
+background-color: #35749f;
 color: white;
 font-weight:bold;
 `
@@ -62,13 +61,14 @@ const Heart = styled(HeartSvg)`
   margin-right: 5px;
 `
 
-export const LinkAd = ({ id, title, location, price, imageUrl }) => {
+export const LinkAd = ({ id, title, type, location, price, imageUrl }) => {
   return (
     <NewLink to={`/plants/${id}`}>
       <Container>
         <PlantImg imageUrl={imageUrl} />
         <Title>{title}</Title>
         <Wrap>
+          <Text>Type: {type}</Text>
           <Text><Location /> {location}</Text>
           <Text><Price /> {price}</Text>
           <TextBlue><Heart fill="white" /> Pick me!</TextBlue>

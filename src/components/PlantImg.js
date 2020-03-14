@@ -5,6 +5,9 @@ export const Image = styled.img`
 margin:auto;
 width:100%;
 display:block;
+border: 10px solid white;
+border-bottom: 0;
+box-sizing: border-box;
 `
 
 export const PlantImg = (props) => {

@@ -1,23 +1,7 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/macro'
+import { Link } from 'react-router-dom'
 import Button from 'components/Button'
-import { Container } from 'components/StyledCollection'
-
-const Title = styled.h1`
-font-size:24px;
-
-`
-const Form = styled.form`
-
-`
-
-const Input = styled.input`
-  font-size: 18px;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-`
+import { Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
 
 export const Registration = () => {
   const [name, setName] = useState('')
@@ -44,9 +28,9 @@ export const Registration = () => {
   }
 
   return (
-    <Container>
+    <>
       <Form>
-        <Title>Register</Title>
+        <Title>Create account</Title>
         <Input
           type="text"
           onChange={(event) => setName(event.target.value)}
@@ -68,10 +52,12 @@ export const Registration = () => {
           type="submit"
           onClick={handleRegister}
           label="Register" />
-
       </Form>
+      <SwitchLinks>
+        <Link to="/login"> Do you have an account?</Link>
+      </SwitchLinks>
       {message}
-    </Container>
+    </>
 
   )
 }

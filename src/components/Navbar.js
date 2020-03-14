@@ -1,18 +1,40 @@
 import React, { useState } from 'react'
 import HamburgerMenu from 'react-hamburger-menu'
 import styled from 'styled-components/macro'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { Header } from 'components/Header'
+
+const HeaderPlaceholder = styled.div`
+  height: 50px;
+`
 
 const LinkElement = styled(Link)`
-  text-decoration: none;
-  color:inherit;
+display: block;
+padding: 10px;
+text-decoration: none;
+color:inherit;
 `
 
 const MenuWrap = styled.div`
 position:absolute;
-background-color:rgb(203, 250, 255);
-padding:8px;
-border-radius:6px;
+top: 0;
+right: 0;
+z-index:1000;
+width: 100%;
+height: ${(props) => (props.open ? '100%' : 'auto')};
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: ${(props) => (props.open ? 'rgb(203, 250, 255)' : 'transparent')};
+font-size: 24px;
+font-weight: 600;
+`
+
+const Burger = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 16px;
 `
 
 const NavLinks = styled.div`
@@ -20,61 +42,62 @@ display:flex;
 flex-direction:column;
 text-decoration:none;
 `
-const MenuButton = styled.p`
-padding:5px;
-font-size:16px;
-font-weight:bold;
-
-
-&:hover {
-  color:darkblue;
-}
-`
 
 export const Navbar = () => {
+  const location = useLocation()
   const [burgerOpen, setBurgerOpen] = useState(false)
 
   const handleBurgerClick = () => {
     setBurgerOpen(!burgerOpen)
   }
 
+  const handleSignout = () => {
+    setBurgerOpen(false)
+    window.localStorage.removeItem('accessToken')
+    window.localStorage.removeItem('userId')
+    window.localStorage.removeItem('userName')
+  }
+
   return (
     <>
-      <MenuWrap>
-        <HamburgerMenu
-          isOpen={burgerOpen}
-          menuClicked={handleBurgerClick}
-          width={18}
-          height={15}
-          strokeWidth={1}
-          rotate={0}
-          color="black"
-          borderRadius={0}
-          animationDuration={0.5} />
+      {location.pathname !== '/' && <HeaderPlaceholder />}
+      <MenuWrap open={burgerOpen}>
+        {location.pathname !== '/' && <Header />}
+        <Burger>
+          <HamburgerMenu
+            isOpen={burgerOpen}
+            menuClicked={handleBurgerClick}
+            width={24}
+            height={18}
+            strokeWidth={1}
+            rotate={0}
+            color={location.pathname === '/' ? 'black' : 'white'}
+            borderRadius={0}
+            animationDuration={0.5} />
+        </Burger>
         {burgerOpen && (
           <NavLinks>
+            <LinkElement to="/" onClick={() => setBurgerOpen(false)}>
+              Plants Ahoy!
+            </LinkElement>
             <LinkElement to="/login" onClick={() => setBurgerOpen(false)}>
-              <MenuButton>
-        Login/Register
-              </MenuButton>
+              Login
             </LinkElement>
 
             <LinkElement to="/newad" onClick={() => setBurgerOpen(false)}>
-              <MenuButton>
+
         Create Ad
-              </MenuButton>
+
             </LinkElement>
 
             <LinkElement to="/mypage" onClick={() => setBurgerOpen(false)}>
-              <MenuButton>
-        My Ads
-              </MenuButton>
-            </LinkElement>
 
-            <LinkElement to="/" onClick={() => setBurgerOpen(false)}>
-              <MenuButton>
+        My Page
+
+            </LinkElement>
+            <LinkElement to="/" onClick={handleSignout}>
         Logout
-              </MenuButton>
+
             </LinkElement>
           </NavLinks>
         )}

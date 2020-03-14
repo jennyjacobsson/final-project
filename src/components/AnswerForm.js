@@ -1,33 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
-import { Link } from 'react-router-dom'
-import { Container } from 'components/StyledCollection'
+import { Container, Input, Form, Title } from 'components/StyledCollection'
 import Button from './Button'
-
-// const FormContainer = styled(Container)`
-// /* min-height:100vh;
-// display:flex;
-// flex-direction:column;
-// text-align:center;
-// justify-content: space-between; */
-// `
-
-const Title = styled.h1`
-font-size:24px;
-
-`
-const Form = styled.form`
-text-align:center;
-
-`
-
-const Input = styled.input`
-  font-size: 18px;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-`
 
 const MessageInput = styled(Input).attrs({
   as: 'textarea'
@@ -36,9 +10,6 @@ const MessageInput = styled(Input).attrs({
 `
 
 const Image = styled.img`
-/* position:absolute;
-bottom:20px;
-right:10px; */
 height:150px;
 flex-shrink:0;
 flex-grow:0;
@@ -56,7 +27,8 @@ export const AnswerForm = () => {
   const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
-  const [handleMessage, setHandleMessage] = useState('')
+
+  const [ShowForm, setShowForm] = useState(true)
 
   const handleAnswerForm = (event) => {
     event.preventDefault()
@@ -66,48 +38,50 @@ export const AnswerForm = () => {
       headers: { 'Content-Type': 'application/json ' }
     })
       .then((res) => {
-        res.json().then((json) => setHandleMessage(json.message))
+        res.json().then(() => setShowForm(false))
       })
       .catch((err) => console.log('error:', err))
   }
   return (
     <Container>
-      <Form onSubmit={handleAnswerForm}>
-        <Title> I'll save this one!</Title>
-        <Input
-          type="text"
-          required
-          placeholder="Name"
-          onChange={(event) => setName(event.target.value)}
-          value={name} />
-        <Input
-          type="text"
-          //   required
-          placeholder="Email"
-          onChange={(event) => setEmail(event.target.value)}
-          value={email} />
-        <Input
-          type="text"
-          //   required
-          placeholder="Subject"
-          onChange={(event) => setSubject(event.target.value)}
-          value={subject} />
-        <MessageInput
-          type="text-area"
-          rows="4"
-          required
-          placeholder="Message"
-          onChange={(event) => setMessage(event.target.value)}
-          value={message} />
-        <Button label="Send!" />
-      </Form>
-      <ImageWrap>
-        <Image src="assets/ShinePlant.png" />
-      </ImageWrap>
-      <Link to="/">
-        <p>Back to the plants</p>
-      </Link>
-      {handleMessage}
+      {ShowForm && (
+        <Form onSubmit={handleAnswerForm}>
+          <Title> I'll save this one!</Title>
+          <Input
+            type="text"
+            required
+            placeholder="Name"
+            onChange={(event) => setName(event.target.value)}
+            value={name} />
+          <Input
+            type="text"
+            required
+            placeholder="Email"
+            onChange={(event) => setEmail(event.target.value)}
+            value={email} />
+          <Input
+            type="text"
+            required
+            placeholder="Subject"
+            onChange={(event) => setSubject(event.target.value)}
+            value={subject} />
+          <MessageInput
+            type="text-area"
+            rows="4"
+            required
+            placeholder="Message"
+            onChange={(event) => setMessage(event.target.value)}
+            value={message} />
+          <Button label="Send!" />
+        </Form>
+      )}
+      {!ShowForm && (
+        <ImageWrap>
+          <Title>Your answer has been sent!</Title>
+          <Image src="assets/ShinePlant.png" />
+        </ImageWrap>
+
+      )}
     </Container>
   )
 }

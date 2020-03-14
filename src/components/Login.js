@@ -1,38 +1,9 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components/macro'
+import { useHistory, Link } from 'react-router-dom'
 import Button from 'components/Button'
-import { Container } from 'components/StyledCollection'
 
-const Title = styled.h1`
-font-size:24px;
-margin:20px;
+import { Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
 
-`
-const Form = styled.form`
-margin-bottom:150px;
-
-`
-
-const Input = styled.input`
-  font-size: 18px;
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-`
-
-const Image = styled.img`
-height:150px;
-flex-shrink:0;
-flex-grow:0;
-width:auto;
-object-fit:contain;
-`
-const ImageWrap = styled.div`
-display:flex;
-flex-direction:column;
-`
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -53,9 +24,10 @@ export const Login = () => {
         }
         return res.json()
       })
-      .then(({ accessToken, userId }) => {
+      .then(({ accessToken, userId, userName }) => {
         window.localStorage.setItem('accessToken', accessToken)
         window.localStorage.setItem('userId', userId)
+        window.localStorage.setItem('userName', userName)
         history.push('/mypage');
       })
       .catch((err) => {
@@ -64,30 +36,31 @@ export const Login = () => {
   }
 
   return (
-    <Container>
-      <Form>
-        <Title>Log in</Title>
+    <>
+      <Form onSubmit={handleLogin}>
+        <Title>Login</Title>
         <Input
           type="text"
           onChange={(event) => setEmail(event.target.value)}
           value={email}
-          placeholder="Email" />
+          placeholder="Email"
+          required />
 
         <Input
           type="password"
           onChange={(event) => setPassword(event.target.value)}
           value={password}
-          placeholder=" Password" />
+          placeholder=" Password"
+          required />
 
         <Button
           label="Log in"
-          type="submit"
-          onClick={handleLogin} />
+          type="submit" />
         {errorMessage}
       </Form>
-      <ImageWrap>
-        <Image src="assets/SmilePlant.png" />
-      </ImageWrap>
-    </Container>
+      <SwitchLinks>
+        <Link to="/register">Want to create an account?</Link>
+      </SwitchLinks>
+    </>
   )
 }
