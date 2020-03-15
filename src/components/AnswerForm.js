@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { Container, Input, Form, Title } from 'components/StyledCollection'
 import Button from './Button'
+import { SERVER_URL } from '../App'
 
 const MessageInput = styled(Input).attrs({
   as: 'textarea'
@@ -31,7 +32,7 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
 
   const handleAnswerForm = (event) => {
     event.preventDefault()
-    fetch('http://localhost:8080/answer', {
+    fetch(`${SERVER_URL}/answer`, {
       method: 'POST',
       body: JSON.stringify({ id, name, email, message }),
       headers: { 'Content-Type': 'application/json ' }

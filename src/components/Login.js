@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import Button from 'components/Button'
-
 import { Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
+import { SERVER_URL } from '../App'
 
 export const Login = () => {
   const [email, setEmail] = useState('')
@@ -13,7 +13,7 @@ export const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault()
     setErrorMessage('')
-    fetch('http://localhost:8080/login', {
+    fetch(`${SERVER_URL}/login`, {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' }

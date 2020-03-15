@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import { Redirect } from 'components/Redirect'
 import { Container, Form, Input, Title } from 'components/StyledCollection'
 import Button from './Button'
-import { getAuth } from '../App'
+import { getAuth, SERVER_URL } from '../App'
 
 const File = styled.label`
 display: flex;
@@ -64,7 +64,7 @@ export const SalesForm = () => {
     formData.append('description', description)
     formData.append('price', price)
 
-    fetch('http://localhost:8080/ad', {
+    fetch(`${SERVER_URL}/ad`, {
       method: 'POST',
       body: formData,
       headers: {

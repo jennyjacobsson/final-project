@@ -4,7 +4,7 @@ import { LinkAd } from 'components/LinkAd'
 import { Loading } from 'components/Loader'
 import { Container } from 'components/StyledCollection'
 import { Redirect } from 'components/Redirect'
-import { getAuth } from '../App'
+import { getAuth, SERVER_URL } from '../App'
 
 const Outer = styled.div`
 text-align: center;
@@ -23,7 +23,7 @@ export const MyPage = () => {
   const { userId, userName, accessToken } = getAuth()
 
   useEffect(() => {
-    fetch('http://localhost:8080/mypage', {
+    fetch(`${SERVER_URL}/mypage`, {
       method: 'GET',
       headers: { Authorization: accessToken }
     })
@@ -40,7 +40,7 @@ export const MyPage = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch(`http://localhost:8080/ads?userId=${userId}`)
+    fetch(`${SERVER_URL}/ads?userId=${userId}`)
       .then((res) => res.json())
       .then((json) => {
         json.reverse()

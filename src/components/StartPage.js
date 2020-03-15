@@ -7,6 +7,8 @@ import { LinkAd } from 'components/LinkAd'
 import { GlassSvg } from './icons/GlassSvg'
 import { Container } from './StyledCollection'
 
+import { SERVER_URL } from '../App'
+
 const Header = styled.div` 
   display:flex;
   height:400px;
@@ -86,7 +88,7 @@ export const StartPage = () => {
   const [searchQuery] = useDebounce(search, 500)
 
   useEffect(() => {
-    fetch(`http://localhost:8080/ads?search=${searchQuery}`)
+    fetch(`${SERVER_URL}/ads?search=${searchQuery}`)
       .then((res) => res.json())
       .then((json) => {
         json.reverse()

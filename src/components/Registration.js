@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Button from 'components/Button'
 import { Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
+import { SERVER_URL } from '../App'
 
 export const Registration = () => {
   const history = useHistory()
@@ -12,7 +13,7 @@ export const Registration = () => {
 
   const handleRegister = (event) => {
     event.preventDefault()
-    fetch('http://localhost:8080/users', {
+    fetch(`${SERVER_URL}/users`, {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' }

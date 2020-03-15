@@ -9,7 +9,7 @@ import { TagSvg } from './icons/TagSvg'
 import { PlantImg } from './PlantImg'
 import Button from './Button'
 import { Container } from './StyledCollection'
-import { getAuth } from '../App'
+import { getAuth, SERVER_URL } from '../App'
 
 const Background = styled.div`
 color:gray;
@@ -52,7 +52,7 @@ export const InfoCard = ({ match: { params: { id } } }) => {
   const history = useHistory()
 
   useEffect(() => {
-    fetch(`http://localhost:8080/ads/${id}`)
+    fetch(`${SERVER_URL}/ads/${id}`)
       .then((res) => res.json())
       .then((json) => {
         setAd(json)
@@ -63,7 +63,7 @@ export const InfoCard = ({ match: { params: { id } } }) => {
   const handleRemoval = () => {
     const confirmed = window.confirm('Do you really want to remove this one?')
     if (confirmed) {
-      fetch(`http://localhost:8080/ads/${id}`, {
+      fetch(`${SERVER_URL}/ads/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: accessToken

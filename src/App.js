@@ -9,6 +9,8 @@ import { Registration } from 'components/Registration'
 import { MyPage } from 'components/MyPage'
 import { Navbar } from 'components/Navbar'
 
+export const SERVER_URL = 'https://plants-ahoy.herokuapp.com';
+
 export const getAuth = () => {
   return {
     userId: window.localStorage.getItem('userId'),
