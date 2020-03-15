@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 import { Loading } from 'components/Loader'
 import { LocationSvg } from './icons/LocationSvg'
 import { PriceSvg } from './icons/PriceSvg'
+import { TagSvg } from './icons/TagSvg'
 import { PlantImg } from './PlantImg'
 import Button from './Button'
 import { Container } from './StyledCollection'
@@ -37,6 +38,11 @@ svg {
   flex-shrink: 0;
   margin-right:8px;
 }
+`
+const Tag = styled(TagSvg)`
+ margin-right: 5px;
+width: 16px;
+height: 16px;
 `
 
 export const InfoCard = ({ match: { params: { id } } }) => {
@@ -89,12 +95,12 @@ export const InfoCard = ({ match: { params: { id } } }) => {
             <PlantImg imageUrl={ad.imageUrl} />
             <Wrap>
               <Title>{ad.title}</Title>
-              <Text>Type: {ad.type}</Text>
+              <Text><Tag fill="#666" /> {ad.type}</Text>
               <Text>{ad.description}</Text>
               <Meta><LocationSvg /> {ad.location}</Meta>
               <Meta><PriceSvg /> {ad.price} kr</Meta>
               {!MY_AD && (
-                <Link to="/answer">
+                <Link to={`/answer/${id}`}>
                   <Button label="I'll save you" />
                 </Link>
               )}

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Button from 'components/Button'
 import { Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
 
 export const Registration = () => {
+  const history = useHistory()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -20,9 +21,7 @@ export const Registration = () => {
         res.json().then((json) => setMessage(json.message))
       })
       .then(() => {
-        setName('')
-        setEmail('')
-        setPassword('')
+        history.push('/login')
       })
       .catch((err) => console.log('error:', err))
   }

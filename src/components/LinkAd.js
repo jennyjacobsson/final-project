@@ -61,16 +61,15 @@ const Heart = styled(HeartSvg)`
   margin-right: 5px;
 `
 
-export const LinkAd = ({ id, title, type, location, price, imageUrl }) => {
+export const LinkAd = ({ id, title, location, price, imageUrl }) => {
   return (
     <NewLink to={`/plants/${id}`}>
       <Container>
         <PlantImg imageUrl={imageUrl} />
         <Title>{title}</Title>
         <Wrap>
-          <Text>Type: {type}</Text>
           <Text><Location /> {location}</Text>
-          <Text><Price /> {price}</Text>
+          <Text><Price /> {price} kr</Text>
           <TextBlue><Heart fill="white" /> Pick me!</TextBlue>
         </Wrap>
       </Container>

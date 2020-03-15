@@ -32,9 +32,9 @@ export const MyPage = () => {
           throw new Error('Access denied')
         } return res.json()
       })
-      .then((json) => setSecret(true))
+      .then(() => setSecret(true))
       .catch((err) => {
-        alert(err.message)
+        console.log(err.message)
       })
   }, [accessToken])
 
@@ -61,6 +61,8 @@ export const MyPage = () => {
               <LinkAd
                 key={userAd._id}
                 id={userAd._id}
+                type={userAd.type}
+                price={userAd.price}
                 imageUrl={userAd.imageUrl}
                 title={userAd.title}
                 location={userAd.location} />

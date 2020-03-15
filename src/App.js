@@ -25,7 +25,7 @@ export const App = () => {
         <Switch>
           <Route path="/" exact component={StartPage} />
           <Route path="/newad" component={SalesForm} />
-          <Route path="/answer" component={AnswerForm} />
+          <Route path="/answer/:id" component={AnswerForm} />
           <Route path="/plants/:id" component={InfoCard} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Registration} />

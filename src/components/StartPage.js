@@ -12,14 +12,13 @@ const Header = styled.div`
   height:400px;
   width:auto;
   text-align:center;
-  justify-content:center;`
+  justify-content:center;
+  `
 
 const LogoImage = styled.img`
-height:200px;
-object-position:top;
-
-
-`
+  height:200px;
+  object-position:top;
+  `
 
 const HeaderText = styled.div`
   display:block;
@@ -54,7 +53,8 @@ const Outer = styled(Container)`
 const Form = styled.form` 
   text-align: center;
   position:relative;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  max-width:400px;
 
   svg {
     position:absolute;
@@ -88,8 +88,11 @@ export const StartPage = () => {
   useEffect(() => {
     fetch(`http://localhost:8080/ads?search=${searchQuery}`)
       .then((res) => res.json())
-      .then((json) => setAds(json))
-    setLoading(false)
+      .then((json) => {
+        json.reverse()
+        setAds(json)
+        setLoading(false)
+      })
   }, [searchQuery])
 
   return (
@@ -99,22 +102,22 @@ export const StartPage = () => {
           <LogoImage src="/assets/logo.png" />
           <h1>Plants Ahoy!</h1>
           <h2>Easy plant adoption</h2>
-          {/* <h1>SAVE A PLANT</h1>
-          <h2>Adopt plants in need of saving!</h2>
-          <Link to="/newad">
-            <p>Give your plants a new change</p>
-          </Link> */}
         </HeaderText>
       </Header>
+
       <Outer>
-        {loading
-          && <Loading />}
         <Form>
           <GlassSvg />
-          <SearchField type="search" onChange={(event) => setSearch(event.target.value)} value={search} placeholder="Search for type or location" />
+          <SearchField
+            type="search"
+            onChange={(event) => setSearch(event.target.value)}
+            value={search}
+            placeholder="Search for type or location" />
         </Form>
-
         <CreateLink to="/newad">Create ad</CreateLink>
+
+        {loading
+          && <Loading />}
 
         {!loading && (
           <>
@@ -125,7 +128,6 @@ export const StartPage = () => {
                   key={ad._id}
                   id={ad._id}
                   title={ad.title}
-                  type={ad.type}
                   location={ad.location}
                   price={ad.price}
                   imageUrl={ad.imageUrl} />

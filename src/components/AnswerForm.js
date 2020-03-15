@@ -22,10 +22,9 @@ display:flex;
 flex-direction:column;
 `
 
-export const AnswerForm = () => {
+export const AnswerForm = ({ match: { params: { id } } }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
 
   const [ShowForm, setShowForm] = useState(true)
@@ -34,7 +33,7 @@ export const AnswerForm = () => {
     event.preventDefault()
     fetch('http://localhost:8080/answer', {
       method: 'POST',
-      body: JSON.stringify({ name, email, subject, message }),
+      body: JSON.stringify({ id, name, email, message }),
       headers: { 'Content-Type': 'application/json ' }
     })
       .then((res) => {
@@ -59,12 +58,6 @@ export const AnswerForm = () => {
             placeholder="Email"
             onChange={(event) => setEmail(event.target.value)}
             value={email} />
-          <Input
-            type="text"
-            required
-            placeholder="Subject"
-            onChange={(event) => setSubject(event.target.value)}
-            value={subject} />
           <MessageInput
             type="text-area"
             rows="4"
