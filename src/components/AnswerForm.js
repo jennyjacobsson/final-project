@@ -78,7 +78,7 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
           <Button label="Send!" />
         </Form>
       )}
-      {ShowForm && (
+      {!ShowForm && (
         <ImageWrap>
           <Title>Your answer has been sent!</Title>
           <Image src="/assets/ShinePlant.png" />
