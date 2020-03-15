@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components/macro'
 import { Container, Input, Form, Title } from 'components/StyledCollection'
 import Button from './Button'
 import { SERVER_URL } from '../App'
@@ -9,6 +9,13 @@ const MessageInput = styled(Input).attrs({
 })`
   resize:vertical;
 `
+const jump = keyframes`
+  0%   {transform: translate3d(0,0,0);}
+  20%  {transform: translate3d(0,10%,0);}
+  40%  {transform: translate3d(0,30%,0);}
+  50% {transform: translate3d(0,50%,0);}
+  100% {transform: translate3d(0,50%,0);}
+`
 
 const Image = styled.img`
 height:150px;
@@ -17,6 +24,8 @@ flex-grow:0;
 width:auto;
 object-fit:contain;
 object-position:center;
+transform-origin: 50% 50%;
+  animation: ${jump} .5s linear alternate infinite;
 `
 const ImageWrap = styled.div`
 display:flex;
@@ -44,7 +53,7 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
   }
   return (
     <Container>
-      {ShowForm && (
+      {!ShowForm && (
         <Form onSubmit={handleAnswerForm}>
           <Title> I'll save this one!</Title>
           <Input
@@ -69,10 +78,10 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
           <Button label="Send!" />
         </Form>
       )}
-      {!ShowForm && (
+      {ShowForm && (
         <ImageWrap>
           <Title>Your answer has been sent!</Title>
-          <Image src="assets/ShinePlant.png" />
+          <Image src="/assets/ShinePlant.png" />
         </ImageWrap>
 
       )}

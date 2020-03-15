@@ -30,6 +30,17 @@ font-size: 24px;
 font-weight: 600;
 `
 
+const BurgerWrap = styled.div`
+position: absolute;
+left: 50%;
+top: 0;
+transform: translateX(-50%);
+width: 100%;
+max-width: 600px;
+padding: 0 10px;
+box-sizing: border-box;
+`
+
 const Burger = styled.div`
   position: absolute;
   top: 0;
@@ -63,18 +74,20 @@ export const Navbar = () => {
       {location.pathname !== '/' && <HeaderPlaceholder />}
       <MenuWrap open={burgerOpen}>
         {location.pathname !== '/' && <Header />}
-        <Burger>
-          <HamburgerMenu
-            isOpen={burgerOpen}
-            menuClicked={handleBurgerClick}
-            width={24}
-            height={18}
-            strokeWidth={1}
-            rotate={0}
-            color={location.pathname === '/' ? 'black' : 'white'}
-            borderRadius={0}
-            animationDuration={0.5} />
-        </Burger>
+        <BurgerWrap>
+          <Burger>
+            <HamburgerMenu
+              isOpen={burgerOpen}
+              menuClicked={handleBurgerClick}
+              width={24}
+              height={18}
+              strokeWidth={1}
+              rotate={0}
+              color={location.pathname === '/' ? 'black' : 'white'}
+              borderRadius={0}
+              animationDuration={0.5} />
+          </Burger>
+        </BurgerWrap>
         {burgerOpen && (
           <NavLinks>
             <LinkElement to="/" onClick={() => setBurgerOpen(false)}>
