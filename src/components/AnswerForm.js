@@ -53,7 +53,7 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
   }
   return (
     <Container>
-      {!ShowForm && (
+      {ShowForm && (
         <Form onSubmit={handleAnswerForm}>
           <Title> I'll save this one!</Title>
           <Input
