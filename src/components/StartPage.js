@@ -53,10 +53,10 @@ const Outer = styled(Container)`
   `
 
 const Form = styled.form` 
-  text-align: center;
-  position:relative;
-  margin: 0 auto 20px;
-  max-width:400px;
+    text-align: center;
+    position:relative;
+    margin: 0 auto 20px;
+    max-width:400px;
 
   svg {
     position:absolute;
@@ -76,8 +76,8 @@ const SearchField = styled.input`
 `
 
 const CreateLink = styled(Link)`
-color: #35749f;
-font-size: 18px;
+  color: #35749f;
+  font-size: 18px;
 `
 
 export const StartPage = () => {

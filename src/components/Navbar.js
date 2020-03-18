@@ -9,36 +9,36 @@ const HeaderPlaceholder = styled.div`
 `
 
 const LinkElement = styled(Link)`
-display: block;
-padding: 10px;
-text-decoration: none;
-color:inherit;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color:inherit;
 `
 
 const MenuWrap = styled.div`
-position:absolute;
-top: 0;
-right: 0;
-z-index:1000;
-width: 100%;
-height: ${(props) => (props.open ? '100%' : 'auto')};
-display: flex;
-align-items: center;
-justify-content: center;
-background-color: ${(props) => (props.open ? 'rgb(203, 250, 255)' : 'transparent')};
-font-size: 24px;
-font-weight: 600;
+  position:absolute;
+  top: 0;
+  right: 0;
+  z-index:1000;
+  width: 100%;
+  height: ${(props) => (props.open ? '100%' : 'auto')};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => (props.open ? 'rgb(203, 250, 255)' : 'transparent')};
+  font-size: 24px;
+  font-weight: 600;
 `
 
 const BurgerWrap = styled.div`
-position: absolute;
-left: 50%;
-top: 0;
-transform: translateX(-50%);
-width: 100%;
-max-width: 600px;
-padding: 0 10px;
-box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  padding: 0 10px;
+  box-sizing: border-box;
 `
 
 const Burger = styled.div`
@@ -49,9 +49,9 @@ const Burger = styled.div`
 `
 
 const NavLinks = styled.div`
-display:flex;
-flex-direction:column;
-text-decoration:none;
+  display:flex;
+  flex-direction:column;
+  text-decoration:none;
 `
 
 export const Navbar = () => {
@@ -96,26 +96,18 @@ export const Navbar = () => {
             <LinkElement to="/login" onClick={() => setBurgerOpen(false)}>
               Login
             </LinkElement>
-
             <LinkElement to="/newad" onClick={() => setBurgerOpen(false)}>
-
-        Create Ad
-
+              Create Ad
             </LinkElement>
-
             <LinkElement to="/mypage" onClick={() => setBurgerOpen(false)}>
-
-        My Page
-
+              My Page
             </LinkElement>
             <LinkElement to="/" onClick={handleSignout}>
-        Logout
-
+              Logout
             </LinkElement>
           </NavLinks>
         )}
       </MenuWrap>
-
     </>
   )
 }

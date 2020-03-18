@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import Button from 'components/Button'
-import { Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
+import { Container, Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
 import { SERVER_URL } from '../App'
 
 export const Login = () => {
@@ -36,7 +36,7 @@ export const Login = () => {
   }
 
   return (
-    <>
+    <Container>
       <Form onSubmit={handleLogin}>
         <Title>Login</Title>
         <Input
@@ -61,6 +61,6 @@ export const Login = () => {
       <SwitchLinks>
         <Link to="/register">Want to create an account?</Link>
       </SwitchLinks>
-    </>
+    </Container>
   )
 }

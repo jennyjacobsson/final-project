@@ -19,34 +19,34 @@ const Container = styled.div`
 `
 
 const Title = styled.h3`
-text-align:left;
-padding: 0 10px;
+  text-align:left;
+  padding: 0 10px;
 `
 
 const Text = styled.p`
-display: flex;
-align-items: center;
-margin:0;
-padding: 10px 16px;
-font-size:14px;
+  display: flex;
+  align-items: center;
+  margin:0;
+  padding: 10px 16px;
+  font-size:14px;
 `
 
 const TextBlue = styled(Text)`
-background-color: #35749f;
-color: white;
-font-weight:bold;
+  background-color: #35749f;
+  color: white;
+  font-weight:bold;
 `
 
 const Wrap = styled.div`
-display:flex;
-justify-content:space-between;
-width:auto;
-background-color:#F3F3F3;
-align-items:stretch;
+  display:flex;
+  justify-content:space-between;
+  width:auto;
+  background-color:#F3F3F3;
+  align-items:stretch;
 
 svg {
   margin-right:8px;
-}
+  }
 `
 
 const Location = styled(LocationSvg)`

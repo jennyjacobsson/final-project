@@ -7,19 +7,21 @@ import { Redirect } from 'components/Redirect'
 import { getAuth, SERVER_URL } from '../App'
 
 const Outer = styled.div`
-text-align: center;
+  text-align: center;
 `
 
 const Title = styled.h1`
-font-size:24px;
-margin:20px;
+  font-size:24px;
+  margin:20px;
+`
+
+const Text = styled.h3`
 `
 
 export const MyPage = () => {
   const [secret, setSecret] = useState(false)
   const [loading, setLoading] = useState(false)
   const [userAds, setUserAds] = useState([])
-
   const { userId, userName, accessToken } = getAuth()
 
   useEffect(() => {
@@ -53,7 +55,12 @@ export const MyPage = () => {
     <Container>
       {secret && (
         <Outer>
-          <Title>Hello {userName}</Title>
+          <Title>Hello {userName}
+            <span role="img" aria-label="leaf">
+        🌱
+            </span>
+          </Title>
+          <Text>Here are your current ads: </Text>
           {loading && <Loading />}
           {!loading && !userAds.length && <p>You have no plants!</p>}
           {userAds.map((userAd) => {

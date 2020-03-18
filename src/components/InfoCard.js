@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -12,9 +11,9 @@ import { Container } from './StyledCollection'
 import { getAuth, SERVER_URL } from '../App'
 
 const Background = styled.div`
-color:gray;
-background-color:white;
-border-radius:6px;
+  color:gray;
+  background-color:white;
+  border-radius:6px;
 `
 
 const Wrap = styled.div`
@@ -26,23 +25,23 @@ const Title = styled.h1`
 `
 
 const Text = styled.p`
-margin-bottom:20px;
+  margin-bottom:20px;
 `
 
 const Meta = styled.div`
-display: flex;
-margin: 15px 0;
-font-size: 14px;
+  display: flex;
+  margin: 15px 0;
+  font-size: 14px;
 
 svg {
   flex-shrink: 0;
   margin-right:8px;
-}
+  }
 `
 const Tag = styled(TagSvg)`
- margin-right: 5px;
-width: 16px;
-height: 16px;
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
 `
 
 export const InfoCard = ({ match: { params: { id } } }) => {

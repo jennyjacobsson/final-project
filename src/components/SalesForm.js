@@ -7,15 +7,15 @@ import Button from './Button'
 import { getAuth, SERVER_URL } from '../App'
 
 const File = styled.label`
-display: flex;
-align-items: center;
-justify-content: center;
-position: relative;
-padding: 10px 25px;
-font-size: 16px;
-background-color: white;
-overflow: hidden;
-border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px 25px;
+  font-size: 16px;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 6px;
 
 input {
   position: absolute;
@@ -24,10 +24,10 @@ input {
 `
 
 const FileImage = styled.img`
-flex-shrink: 0;
-width: 50px;
-height: auto;
-margin-right: 1em;
+  flex-shrink: 0;
+  width: 50px;
+  height: auto;
+  margin-right: 1em;
 `
 
 const TextArea = styled(Input).attrs({
@@ -45,7 +45,6 @@ export const SalesForm = () => {
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
   const [filename, setFilename] = useState('')
-
   const { accessToken } = getAuth()
 
   const handleFileChange = () => {

@@ -83,7 +83,6 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
           <Title>Your answer has been sent!</Title>
           <Image src="/assets/ShinePlant.png" />
         </ImageWrap>
-
       )}
     </Container>
   )
