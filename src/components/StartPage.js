@@ -37,9 +37,9 @@ const HeaderText = styled.div`
     margin: 0;
   }
 
- a {
-  color:white;
-  cursor:pointer;
+  a {
+    color:white;
+    cursor:pointer;
  }
 `
 
@@ -51,7 +51,6 @@ const Outer = styled(Container)`
     font-size: 18px;
   }
   `
-
 const Form = styled.form` 
     text-align: center;
     position:relative;
@@ -84,7 +83,6 @@ export const StartPage = () => {
   const [search, setSearch] = useState('')
   const [ads, setAds] = useState([])
   const [loading, setLoading] = useState(true)
-
   const [searchQuery] = useDebounce(search, 500)
 
   useEffect(() => {

@@ -44,10 +44,10 @@ const Wrap = styled.div`
   background-color:#F3F3F3;
   align-items:stretch;
 
-svg {
-  margin-right:8px;
-  }
-`
+  svg {
+    margin-right:8px;
+    }
+  `
 
 const Location = styled(LocationSvg)`
   margin-right: 5px;

@@ -18,25 +18,24 @@ const jump = keyframes`
 `
 
 const Image = styled.img`
-height:150px;
-flex-shrink:0;
-flex-grow:0;
-width:auto;
-object-fit:contain;
-object-position:center;
-transform-origin: 50% 50%;
-  animation: ${jump} .5s linear alternate infinite;
+  height:150px;
+  flex-shrink:0;
+  flex-grow:0;
+  width:auto;
+  object-fit:contain;
+  object-position:center;
+  transform-origin: 50% 50%;
+    animation: ${jump} .5s linear alternate infinite;
 `
 const ImageWrap = styled.div`
-display:flex;
-flex-direction:column;
+  display:flex;
+  flex-direction:column;
 `
 
 export const AnswerForm = ({ match: { params: { id } } }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-
   const [ShowForm, setShowForm] = useState(true)
 
   const handleAnswerForm = (event) => {

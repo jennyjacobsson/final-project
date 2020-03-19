@@ -60,7 +60,7 @@ export const MyPage = () => {
         🌱
             </span>
           </Title>
-          <Text>Here are your current ads: </Text>
+          <Text>Here are your previous ads: </Text>
           {loading && <Loading />}
           {!loading && !userAds.length && <p>You have no plants!</p>}
           {userAds.map((userAd) => {
