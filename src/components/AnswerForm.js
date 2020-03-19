@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components/macro'
-import { Container, Input, Form, Title } from 'components/StyledCollection'
-import Button from './Button'
+import { Input, Form, Title } from './StyledCollection'
+import { Button } from './Button'
 import { SERVER_URL } from '../App'
 
 const MessageInput = styled(Input).attrs({
@@ -32,7 +32,7 @@ const ImageWrap = styled.div`
   flex-direction:column;
 `
 
-export const AnswerForm = ({ match: { params: { id } } }) => {
+export const AnswerForm = ({ id, onSubmit }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -46,15 +46,18 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
       headers: { 'Content-Type': 'application/json ' }
     })
       .then((res) => {
-        res.json().then(() => setShowForm(false))
+        res.json().then(() => {
+          setShowForm(false)
+          onSubmit()
+        })
       })
       .catch((err) => console.log('error:', err))
   }
   return (
-    <Container>
+    <>
       {ShowForm && (
         <Form onSubmit={handleAnswerForm}>
-          <Title> I'll save this one!</Title>
+          <Title>I&lsquo;ll save this one!</Title>
           <Input
             type="text"
             required
@@ -74,7 +77,8 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
             placeholder="Message"
             onChange={(event) => setMessage(event.target.value)}
             value={message} />
-          <Button label="Send!" />
+          <p>This message will be sent to the current owner.</p>
+          <Button label="Send" />
         </Form>
       )}
       {!ShowForm && (
@@ -83,6 +87,6 @@ export const AnswerForm = ({ match: { params: { id } } }) => {
           <Image src="/assets/ShinePlant.png" />
         </ImageWrap>
       )}
-    </Container>
+    </>
   )
 }

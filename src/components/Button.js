@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 const Container = styled.div`
   margin:40px 0;
   text-align:center;
-  `
+`
 
 const Btn = styled.button`
   border-radius: 6px;
@@ -16,12 +16,10 @@ const Btn = styled.button`
   background-color: ${({ bg }) => bg || '#35749f'};
 `
 
-const Button = ({ label, onClick, bg }) => {
+export const Button = ({ label, onClick, bg }) => {
   return (
     <Container>
       <Btn type="submit" onClick={onClick} bg={bg}>{label}</Btn>
     </Container>
   )
 }
-
-export default Button

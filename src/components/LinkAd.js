@@ -7,11 +7,15 @@ import { PriceSvg } from './icons/PriceSvg'
 import { HeartSvg } from './icons/HeartSvg'
 
 const NewLink = styled(Link)`
+  display: block;
+  height: 100%;
   text-decoration: none;
 `
 
 const Container = styled.div`
-  margin-bottom:16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
   color:gray;
   background-color:#fff;
   border-radius:6px;
@@ -21,6 +25,11 @@ const Container = styled.div`
 const Title = styled.h3`
   text-align:left;
   padding: 0 10px;
+  flex: 1;
+
+  @media (min-width: 600px) {
+    font-size:22px;
+  }
 `
 
 const Text = styled.p`
@@ -43,11 +52,12 @@ const Wrap = styled.div`
   width:auto;
   background-color:#F3F3F3;
   align-items:stretch;
+  margin-top: auto;
 
   svg {
     margin-right:8px;
-    }
-  `
+  }
+`
 
 const Location = styled(LocationSvg)`
   margin-right: 5px;

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import HamburgerMenu from 'react-hamburger-menu'
 import styled from 'styled-components/macro'
 import { Link, useLocation } from 'react-router-dom'
-import { Header } from 'components/Header'
+import { Header } from './Header'
 
 const HeaderPlaceholder = styled.div`
   height: 50px;
@@ -37,8 +37,10 @@ const BurgerWrap = styled.div`
   transform: translateX(-50%);
   width: 100%;
   max-width: 600px;
-  padding: 0 10px;
-  box-sizing: border-box;
+  @media (min-width: 768px) {
+    max-width: ${(props) => (props.isStartPage ? 1000 : 600)}px;}
+    padding: 0 10px;
+    box-sizing: border-box;
 `
 
 const Burger = styled.div`
@@ -74,7 +76,7 @@ export const Navbar = () => {
       {location.pathname !== '/' && <HeaderPlaceholder />}
       <MenuWrap open={burgerOpen}>
         {location.pathname !== '/' && <Header />}
-        <BurgerWrap>
+        <BurgerWrap isStartPage={location.pathname === '/'}>
           <Burger>
             <HamburgerMenu
               isOpen={burgerOpen}
@@ -94,7 +96,7 @@ export const Navbar = () => {
               Plants Ahoy!
             </LinkElement>
             <LinkElement to="/login" onClick={() => setBurgerOpen(false)}>
-              Login
+              Log In
             </LinkElement>
             <LinkElement to="/newad" onClick={() => setBurgerOpen(false)}>
               Create Ad
@@ -103,7 +105,7 @@ export const Navbar = () => {
               My Page
             </LinkElement>
             <LinkElement to="/" onClick={handleSignout}>
-              Logout
+              Log Out
             </LinkElement>
           </NavLinks>
         )}

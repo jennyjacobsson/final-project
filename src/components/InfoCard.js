@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { Loading } from 'components/Loader'
+import { Loading } from './Loader'
 import { LocationSvg } from './icons/LocationSvg'
 import { PriceSvg } from './icons/PriceSvg'
 import { TagSvg } from './icons/TagSvg'
 import { PlantImg } from './PlantImg'
-import Button from './Button'
+import { Button } from './Button'
 import { Container } from './StyledCollection'
 import { getAuth, SERVER_URL } from '../App'
+import { AnswerForm } from './AnswerForm'
 
 const Background = styled.div`
   color:gray;
@@ -22,20 +23,29 @@ const Wrap = styled.div`
 `
 
 const Title = styled.h1`
+  font-size:24px;
+
+  @media (min-width: 600px) {
+    font-size:26px;
+  }
 `
 
 const Text = styled.p`
-  margin-bottom:20px;
+  margin-bottom:40px;
+
+  @media (min-width: 600px) {
+    font-size:18px;
+  }
 `
 
 const Meta = styled.div`
   display: flex;
   margin: 15px 0;
-  font-size: 14px;
+  font-size: 16px;
 
-svg {
-  flex-shrink: 0;
-  margin-right:8px;
+  svg {
+    flex-shrink: 0;
+    margin-right:8px;
   }
 `
 const Tag = styled(TagSvg)`
@@ -49,6 +59,8 @@ export const InfoCard = ({ match: { params: { id } } }) => {
   const [loading, setLoading] = useState(true)
   const { accessToken, userId } = getAuth()
   const history = useHistory()
+  const [showAnswer, setShowAnswer] = useState(false)
+  const [adVisibility, setAdVisibility] = useState(true)
 
   useEffect(() => {
     fetch(`${SERVER_URL}/ads/${id}`)
@@ -82,32 +94,35 @@ export const InfoCard = ({ match: { params: { id } } }) => {
     return null
   }
 
-  const MY_AD = (accessToken && userId && userId === ad.userId)
+  const MY_AD = userId === ad.userId
 
   return (
     <Container>
-      <Background>
-        {loading && <Loading />}
+      {adVisibility && (
+        <Background>
+          {loading && <Loading />}
 
-        {!loading && (
-          <>
-            <PlantImg imageUrl={ad.imageUrl} />
-            <Wrap>
-              <Title>{ad.title}</Title>
-              <Text><Tag fill="#666" /> {ad.type}</Text>
-              <Text>{ad.description}</Text>
-              <Meta><LocationSvg /> {ad.location}</Meta>
-              <Meta><PriceSvg /> {ad.price} kr</Meta>
-              {!MY_AD && (
-                <Link to={`/answer/${id}`}>
-                  <Button label="I'll save you" />
-                </Link>
-              )}
-              {MY_AD && <Button label="Remove" onClick={handleRemoval} bg="#df2f2f" />}
-            </Wrap>
-          </>
-        )}
-      </Background>
+          {!loading && (
+            <>
+              <PlantImg imageUrl={ad.imageUrl} />
+              <Wrap>
+                <Title>{ad.title}</Title>
+                <Text>{ad.description}</Text>
+                <Meta><Tag fill="#666" /> {ad.type}</Meta>
+                <Meta><LocationSvg /> {ad.location}</Meta>
+                <Meta><PriceSvg /> {ad.price} kr</Meta>
+                {!showAnswer && !MY_AD && (
+                  <Button label="I'll save you" onClick={() => setShowAnswer(true)} />
+                )}
+                {MY_AD && <Button label="Remove" onClick={handleRemoval} bg="#df2f2f" />}
+              </Wrap>
+            </>
+          )}
+        </Background>
+      )}
+      {showAnswer && (
+        <AnswerForm id={id} onSubmit={() => setAdVisibility(false)} />
+      )}
     </Container>
   )
 }

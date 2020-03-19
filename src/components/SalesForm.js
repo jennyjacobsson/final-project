@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { Redirect } from 'components/Redirect'
-import { Container, Form, Input, Title } from 'components/StyledCollection'
-import Button from './Button'
+import { Redirect } from './Redirect'
+import { Container, Form, Input, Title } from './StyledCollection'
+import { Button } from './Button'
 import { getAuth, SERVER_URL } from '../App'
 
 const File = styled.label`
@@ -118,7 +118,7 @@ export const SalesForm = () => {
         <Input
           type="text"
           required
-          placeholder="Price"
+          placeholder="Price (numbers only)"
           onChange={(event) => setPrice(event.target.value)}
           value={price} />
         <TextArea

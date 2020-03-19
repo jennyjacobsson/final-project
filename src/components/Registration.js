@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import Button from 'components/Button'
-import { Container, Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
+import { Button } from './Button'
+import { Container, Input, Form, Title, SwitchLinks } from './StyledCollection'
 import { SERVER_URL } from '../App'
 
 export const Registration = () => {
@@ -33,17 +33,20 @@ export const Registration = () => {
         <Title>Create account</Title>
         <Input
           type="text"
+          required
           onChange={(event) => setName(event.target.value)}
           value={name}
           placeholder="Name" />
         <Input
           type="text"
+          required
           onChange={(event) => setEmail(event.target.value)}
           value={email}
           placeholder="Email" />
 
         <Input
           type="password"
+          required
           onChange={(event) => setPassword(event.target.value)}
           value={password}
           placeholder="Password" />

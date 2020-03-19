@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
-import { LinkAd } from 'components/LinkAd'
-import { Loading } from 'components/Loader'
-import { Container } from 'components/StyledCollection'
-import { Redirect } from 'components/Redirect'
+import { LinkAd } from './LinkAd'
+import { Loading } from './Loader'
+import { Container } from './StyledCollection'
+import { Redirect } from './Redirect'
 import { getAuth, SERVER_URL } from '../App'
 
 const Outer = styled.div`
@@ -18,9 +18,18 @@ const Title = styled.h1`
 const Text = styled.h3`
 `
 
+const LinkWrap = styled.div`
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 40px;
+  }
+`
+
 export const MyPage = () => {
   const [secret, setSecret] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [loadingLogin, setLoadingLogin] = useState(true)
   const [userAds, setUserAds] = useState([])
   const { userId, userName, accessToken } = getAuth()
 
@@ -34,7 +43,10 @@ export const MyPage = () => {
           throw new Error('Access denied')
         } return res.json()
       })
-      .then(() => setSecret(true))
+      .then(() => {
+        setSecret(true)
+        setLoadingLogin(false)
+      })
       .catch((err) => {
         console.log(err.message)
       })
@@ -51,21 +63,29 @@ export const MyPage = () => {
       })
   }, [userId])
 
+  if (loadingLogin) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    )
+  }
+
   return (
     <Container>
       {secret && (
         <Outer>
-          <Title>Hello {userName}
+          <Title>Hello {`${userName} `}
             <span role="img" aria-label="leaf">
-        🌱
+              🌱
             </span>
           </Title>
-          <Text>Here are your previous ads: </Text>
+          <Text>Here are your current ads: </Text>
           {loading && <Loading />}
           {!loading && !userAds.length && <p>You have no plants!</p>}
           {userAds.map((userAd) => {
             return (
-              <LinkAd
+              <LinkWrap><LinkAd
                 key={userAd._id}
                 id={userAd._id}
                 type={userAd.type}
@@ -73,6 +93,7 @@ export const MyPage = () => {
                 imageUrl={userAd.imageUrl}
                 title={userAd.title}
                 location={userAd.location} />
+              </LinkWrap>
             )
           })}
         </Outer>

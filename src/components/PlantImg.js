@@ -8,6 +8,7 @@ export const Image = styled.img`
   border: 10px solid white;
   border-bottom: 0;
   box-sizing: border-box;
+  flex: 1;
 `
 
 export const PlantImg = (props) => {

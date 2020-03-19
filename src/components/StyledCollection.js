@@ -55,3 +55,26 @@ export const SwitchLinks = styled.div`
   color: #35749f;
   font: inherit;
 `
+
+export const Ads = styled.div`
+  max-width: 500px;
+  margin: auto;
+
+  @media (min-width: 768px) {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: none;
+  }
+`
+
+export const Ad = styled.div`
+  margin-bottom:16px;
+
+  @media (min-width: 768px) {
+    margin-bottom:40px;
+    width: calc(50% - 40px);
+    flex-shrink: 1;
+    padding: 0 20px;
+  }
+`

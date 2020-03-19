@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useDebounce } from 'use-debounce'
 import { Link } from 'react-router-dom';
-import { Loading } from 'components/Loader'
-import { LinkAd } from 'components/LinkAd'
+import { Loading } from './Loader'
+import { LinkAd } from './LinkAd'
 import { GlassSvg } from './icons/GlassSvg'
-import { Container } from './StyledCollection'
-
+import { Ad, Ads, Container } from './StyledCollection'
 import { SERVER_URL } from '../App'
 
 const Header = styled.div` 
@@ -15,12 +14,12 @@ const Header = styled.div`
   width:auto;
   text-align:center;
   justify-content:center;
-  `
+`
 
 const LogoImage = styled.img`
   height:200px;
   object-position:top;
-  `
+`
 
 const HeaderText = styled.div`
   display:block;
@@ -44,18 +43,23 @@ const HeaderText = styled.div`
 `
 
 const Outer = styled(Container)`
+  @media (min-width: 768px) {
+    max-width: 1000px;
+  }
+
   h2 {
     margin: 40px 0 20px;
     text-transform: uppercase;
     font-weight: normal;
     font-size: 18px;
   }
-  `
+`
+
 const Form = styled.form` 
-    text-align: center;
-    position:relative;
-    margin: 0 auto 20px;
-    max-width:400px;
+  text-align: center;
+  position:relative;
+  margin: 0 auto 20px;
+  max-width:400px;
 
   svg {
     position:absolute;
@@ -122,17 +126,21 @@ export const StartPage = () => {
         {!loading && (
           <>
             <h2>Plants looking for a new home</h2>
-            {ads.map((ad) => {
-              return (
-                <LinkAd
-                  key={ad._id}
-                  id={ad._id}
-                  title={ad.title}
-                  location={ad.location}
-                  price={ad.price}
-                  imageUrl={ad.imageUrl} />
-              );
-            })}
+            <Ads>
+              {ads.map((ad) => {
+                return (
+                  <Ad>
+                    <LinkAd
+                      key={ad._id}
+                      id={ad._id}
+                      title={ad.title}
+                      location={ad.location}
+                      price={ad.price}
+                      imageUrl={ad.imageUrl} />
+                  </Ad>
+                );
+              })}
+            </Ads>
           </>
         )}
       </Outer>

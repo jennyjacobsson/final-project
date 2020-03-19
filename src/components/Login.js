@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import Button from 'components/Button'
-import { Container, Input, Form, Title, SwitchLinks } from 'components/StyledCollection'
+import { Button } from './Button'
+import { Container, Input, Form, Title, SwitchLinks } from './StyledCollection'
 import { SERVER_URL } from '../App'
 
 export const Login = () => {
@@ -38,7 +38,7 @@ export const Login = () => {
   return (
     <Container>
       <Form onSubmit={handleLogin}>
-        <Title>Login</Title>
+        <Title>Log in</Title>
         <Input
           type="text"
           onChange={(event) => setEmail(event.target.value)}
