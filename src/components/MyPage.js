@@ -29,7 +29,6 @@ const LinkWrap = styled.div`
 export const MyPage = () => {
   const [secret, setSecret] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [loadingLogin, setLoadingLogin] = useState(true)
   const [userAds, setUserAds] = useState([])
   const { userId, userName, accessToken } = getAuth()
 
@@ -45,7 +44,6 @@ export const MyPage = () => {
       })
       .then(() => {
         setSecret(true)
-        setLoadingLogin(false)
       })
       .catch((err) => {
         console.log(err.message)
@@ -62,14 +60,6 @@ export const MyPage = () => {
         setLoading(false)
       })
   }, [userId])
-
-  if (loadingLogin) {
-    return (
-      <Container>
-        <Loading />
-      </Container>
-    )
-  }
 
   return (
     <Container>
