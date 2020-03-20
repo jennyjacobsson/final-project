@@ -7,7 +7,7 @@ export const Redirect = () => {
   const history = useHistory()
   return (
     <Container>
-      <Title>You are not logged in</Title>
+      <Title>You need to log in/create an account</Title>
       <Button label="Log in" onClick={() => history.push('/login')} />
     </Container>
   )

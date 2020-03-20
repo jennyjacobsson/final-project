@@ -10,7 +10,7 @@ import { SERVER_URL } from '../App'
 
 const Header = styled.div` 
   display:flex;
-  height:400px;
+  height:390px;
   width:auto;
   text-align:center;
   justify-content:center;
@@ -78,9 +78,18 @@ const SearchField = styled.input`
   font-size:18px;
 `
 
-const CreateLink = styled(Link)`
-  color: #35749f;
+const Wrap = styled.div`
+  margin:40px 0 60px;
+`
+
+const Btn = styled.button`
+  border-radius: 6px;
   font-size: 18px;
+  border: 0;
+  font-weight: 400;
+  padding: 8px 20px;
+  background-color:#222;
+  color:white;
 `
 
 export const StartPage = () => {
@@ -116,9 +125,11 @@ export const StartPage = () => {
             type="search"
             onChange={(event) => setSearch(event.target.value)}
             value={search}
-            placeholder="Search for type or location" />
+            placeholder="SEARCH N' SAVE" />
         </Form>
-        <CreateLink to="/newad">Create ad</CreateLink>
+        <Wrap><p>Or put yours up for adoption</p>
+          <Link to="/newad"><Btn>Create ad</Btn></Link>
+        </Wrap>
 
         {loading
           && <Loading />}
