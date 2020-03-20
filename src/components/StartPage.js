@@ -93,7 +93,7 @@ export const StartPage = () => {
     fetch(`${SERVER_URL}/ads?search=${searchQuery}`)
       .then((res) => res.json())
       .then((json) => {
-        json.reverse()
+        // json.reverse()
         setAds(json)
         setLoading(false)
       })
