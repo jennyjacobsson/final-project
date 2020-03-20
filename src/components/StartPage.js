@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useDebounce } from 'use-debounce'
@@ -5,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Loading } from './Loader'
 import { LinkAd } from './LinkAd'
 import { GlassSvg } from './icons/GlassSvg'
-import { Ad, Ads, Container } from './StyledCollection'
+import { Ad, Ads, Container, Btn } from './StyledCollection'
 import { SERVER_URL } from '../App'
 
 const Header = styled.div` 
@@ -82,16 +83,6 @@ const Wrap = styled.div`
   margin:40px 0 60px;
 `
 
-const Btn = styled.button`
-  border-radius: 6px;
-  font-size: 18px;
-  border: 0;
-  font-weight: 400;
-  padding: 8px 20px;
-  background-color:#222;
-  color:white;
-`
-
 export const StartPage = () => {
   const [search, setSearch] = useState('')
   const [ads, setAds] = useState([])
@@ -128,7 +119,9 @@ export const StartPage = () => {
             placeholder="SEARCH N' SAVE" />
         </Form>
         <Wrap><p>Or put yours up for adoption</p>
-          <Link to="/newad"><Btn>Create ad</Btn></Link>
+          <Link to="/newad">
+            <Btn>Create ad</Btn>
+          </Link>
         </Wrap>
 
         {loading

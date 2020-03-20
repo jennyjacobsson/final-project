@@ -110,7 +110,7 @@ export const InfoCard = ({ match: { params: { id } } }) => {
                 <Text>{ad.description}</Text>
                 <Meta><Tag fill="#666" /> {ad.type}</Meta>
                 <Meta><LocationSvg /> {ad.location}</Meta>
-                <Meta><PriceSvg /> {ad.price} kr</Meta>
+                <Meta><PriceSvg /> {ad.price > 0 ? `${ad.price} kr` : 'Free'}</Meta>
                 {!showAnswer && !MY_AD && (
                   <Button label="I'll save you" onClick={() => setShowAnswer(true)} />
                 )}

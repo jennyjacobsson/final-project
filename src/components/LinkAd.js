@@ -79,7 +79,7 @@ export const LinkAd = ({ id, title, location, price, imageUrl }) => {
         <Title>{title}</Title>
         <Wrap>
           <Text><Location /> {location}</Text>
-          <Text><Price /> {price} kr</Text>
+          <Text><Price /> {price > 0 ? `${price} kr` : 'Free'}</Text>
           <TextBlue><Heart fill="white" /> Pick me!</TextBlue>
         </Wrap>
       </Container>

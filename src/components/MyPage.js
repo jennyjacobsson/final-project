@@ -1,8 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
+import { Link } from 'react-router-dom'
 import { LinkAd } from './LinkAd'
 import { Loading } from './Loader'
-import { Container } from './StyledCollection'
+import { Container, Btn } from './StyledCollection'
 import { Redirect } from './Redirect'
 import { getAuth, SERVER_URL } from '../App'
 
@@ -24,6 +26,12 @@ const LinkWrap = styled.div`
   @media (min-width: 768px) {
     margin-bottom: 40px;
   }
+`
+
+const Button = styled(Btn)`
+  background-color:#35749f;
+  margin:10px;
+  font-size:16px;
 `
 
 export const MyPage = () => {
@@ -70,6 +78,9 @@ export const MyPage = () => {
               🌱
             </span>
           </Title>
+          <Link to="/newad">
+            <Button>Create ad</Button>
+          </Link>
           <Text>Here are your current ads: </Text>
           {loading && <Loading />}
           {!loading && !userAds.length && <p>You have no plants!</p>}

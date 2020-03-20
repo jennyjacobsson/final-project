@@ -38,7 +38,7 @@ export const Registration = () => {
           value={name}
           placeholder="Name" />
         <Input
-          type="text"
+          type="e-mail"
           required
           onChange={(event) => setEmail(event.target.value)}
           value={email}
