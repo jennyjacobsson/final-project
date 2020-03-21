@@ -5,7 +5,6 @@ import { Loading } from './Loader'
 import { LocationSvg } from './icons/LocationSvg'
 import { PriceSvg } from './icons/PriceSvg'
 import { TagSvg } from './icons/TagSvg'
-import { PlantImg } from './PlantImg'
 import { Button } from './Button'
 import { Container } from './StyledCollection'
 import { getAuth, SERVER_URL } from '../App'
@@ -52,6 +51,14 @@ const Tag = styled(TagSvg)`
   margin-right: 5px;
   width: 16px;
   height: 16px;
+`
+
+const Image = styled.img`
+  width: 100% ;
+  height: auto;
+  border: 10px solid transparent;
+  border-bottom: 0;
+  box-sizing: border-box;
 `
 
 export const InfoCard = ({ match: { params: { id } } }) => {
@@ -104,7 +111,7 @@ export const InfoCard = ({ match: { params: { id } } }) => {
 
           {!loading && (
             <>
-              <PlantImg imageUrl={ad.imageUrl} />
+              <Image src={ad.imageUrl} />
               <Wrap>
                 <Title>{ad.title}</Title>
                 <Text>{ad.description}</Text>

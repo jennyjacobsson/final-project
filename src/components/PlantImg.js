@@ -1,18 +1,33 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-export const Image = styled.img`
-  margin:auto;
-  width:100%;
-  display:block;
+const Outer = styled.div`
   border: 10px solid white;
   border-bottom: 0;
-  box-sizing: border-box;
   flex: 1;
+`
+
+const Wrap = styled.div`
+  position: relative;
+  padding-top: 62.5%;
+  overflow: hidden;
+`
+
+const Image = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `
 
 export const PlantImg = (props) => {
   return (
-    <Image src={props.imageUrl} />
+    <Outer>
+      <Wrap>
+        <Image src={props.imageUrl} />
+      </Wrap>
+    </Outer>
   )
 }

@@ -133,9 +133,8 @@ export const StartPage = () => {
             <Ads>
               {ads.map((ad) => {
                 return (
-                  <Ad>
+                  <Ad key={ad._id}>
                     <LinkAd
-                      key={ad._id}
                       id={ad._id}
                       title={ad.title}
                       location={ad.location}

@@ -86,14 +86,14 @@ export const MyPage = () => {
           {!loading && !userAds.length && <p>You have no plants!</p>}
           {userAds.map((userAd) => {
             return (
-              <LinkWrap><LinkAd
-                key={userAd._id}
-                id={userAd._id}
-                type={userAd.type}
-                price={userAd.price}
-                imageUrl={userAd.imageUrl}
-                title={userAd.title}
-                location={userAd.location} />
+              <LinkWrap key={userAd._id}>
+                <LinkAd
+                  id={userAd._id}
+                  type={userAd.type}
+                  price={userAd.price}
+                  imageUrl={userAd.imageUrl}
+                  title={userAd.title}
+                  location={userAd.location} />
               </LinkWrap>
             )
           })}
